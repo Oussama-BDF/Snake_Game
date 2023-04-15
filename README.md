@@ -1,2 +1,2 @@
 # Snake_Game
-un jeu du serpent classique réalisé en c++
+Un jeu du serpent classique réalisé en C++ et la bibliothèque SFML
