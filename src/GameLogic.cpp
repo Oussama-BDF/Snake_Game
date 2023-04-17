@@ -2,34 +2,34 @@
 
 
 
-GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window,this->board.getBoardPos())
+GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window)
 {
     this->gameOver=false;
     this->score=0;
 }
 
+
 bool GameLogic::getGameOver(){return this->gameOver;}
+
 
 void GameLogic::logic(const sf::Vector2u& window)
 {
     this->snake.input();
 
-    // Chaque segment du serpent prend la position du segment suivant
     this->snake.shift();
 
     // Tester la collision entre le serpent et la nourriture
     if (this->snake.getHeadPos().x == this->food.getFoodPos().x && this->snake.getHeadPos().y == this->food.getFoodPos().y)
     { 
-        // Générer une position aléatoirement pour la nourriture
         this->food.generatePos(window, this->board.getBoardPos());
+
+        this->snake.addSegment();
             
-        // Incrémentez le score
         this->score++;
-	    this->snake.addSegment();
     }
 
     // Modifier la position du cercle à chaque itération,
-	this->snake.ModifyPos();
+	this->snake.changePos();
 
     // Tester la collision du serpent avec le plateau
     if (this->snake.getHeadPos().x < this->board.getBoardPos().x || this->snake.getHeadPos().y < this->board.getBoardPos().y || this->snake.getHeadPos().x == this->board.getBoardPos().x+this->board.getBoardSize().x || this->snake.getHeadPos().y == this->board.getBoardPos().y+this->board.getBoardSize().y)
@@ -39,18 +39,20 @@ void GameLogic::logic(const sf::Vector2u& window)
 
 }
 
-void GameLogic::drawing(sf::RenderWindow& window)
+
+void GameLogic::draw(sf::RenderWindow& window)
 {
     window.draw(this->board.getBoard());
     window.draw(this->food.getFood());
     window.draw(this->snake.getHead());
-    for (int l=0; l<this->snake.getTailLength()+2; l++) // +1 pour afficher le segment 2
+    for (int l=0; l<this->snake.getTailLength()+2; l++) // +2 pour afficher les segments 1 et 2
     {
         window.draw(this->snake.getSegment(l));
     }
 }
 
-void GameLogic::startPlay(sf::RenderWindow& window)
+
+void GameLogic::play(sf::RenderWindow& window)
 {
     //on aura besoin cette variable pour ralentir le mouvement de la boucle principale (8 images par second)
     sf::Time timePerFrame = sf::seconds(1.f / 8.f);
@@ -69,18 +71,19 @@ void GameLogic::startPlay(sf::RenderWindow& window)
         // Effacer l'écran
         window.clear(sf::Color::Black);
 
-        // Dessiner le plateau de jeu
-        this->drawing(window);
+        // Dessiner le jeu
+        this->draw(window);
 
         // Afficher l'écran
         window.display();
 
-
-
+        // Appliquer la logique du jeu
         this->logic(window.getSize());
+
+        // Sortie de la boucle si l'utilisateur perd
         if (this->getGameOver()==true)  window.close();
 
-        // Ralentir le mouvement de la boucle (9 image par second)
+        // Ralentir le mouvement de la boucle (8 image par second)
         sf::sleep(timePerFrame);
 
     }

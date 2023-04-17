@@ -10,8 +10,17 @@ class Food{
 
     public:
     Food();
-    Food(const sf::Vector2u& window,  const sf::Vector2f& board);
-    void generatePos(const sf::Vector2u& window,  const sf::Vector2f& board);
+
+    // "window" -> "taille-fenêtre" : pour spécifier la position de la nourriture par rapport la fenêtre
+    Food(const sf::Vector2u& window);
+
+    // Récupérer la position de la nourriture
     sf::Vector2f getFoodPos() const;
+
+    // Récuperer l'objet "food"
     sf::Sprite getFood() const;
+
+    // Générer une position aléatoire pour la nourriture
+    void generatePos(const sf::Vector2u& window,  const sf::Vector2f& board);
+
 };
