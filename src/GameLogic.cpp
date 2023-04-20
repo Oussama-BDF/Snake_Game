@@ -2,7 +2,7 @@
 
 
 
-GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window)
+GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window), menu(window)
 {
     this->gameOver=false;
     this->score=0;
@@ -83,7 +83,7 @@ void GameLogic::play(sf::RenderWindow& window)
         // Sortie de la boucle si l'utilisateur perd
         if (this->getGameOver()==true)  window.close();
 
-        // Ralentir le mouvement de la boucle (8 image par second)
+        // Ralentir le mouvement de la boucle (8 images/itérations par second)
         sf::sleep(timePerFrame);
 
     }

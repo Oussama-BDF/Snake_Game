@@ -2,6 +2,7 @@
 #include "Food.hpp"
 #include "Snake.hpp"
 #include "Board.hpp"
+#include "GameMenu.hpp"
 
 
 
@@ -10,6 +11,7 @@ class GameLogic{
     Snake snake;
     Food food;
     Board board;
+    GameMenu menu;
     bool gameOver;
     int score;
 
