@@ -17,6 +17,7 @@ class GameLogic{
 
 
     public:
+    GameLogic(){}
     GameLogic(const sf::Vector2u& window);
     
     bool getGameOver();
@@ -29,6 +30,9 @@ class GameLogic{
 
     // La boucle principale du jeu
     void play(sf::RenderWindow& window);
+
+    // Appeler la fonction "displayMenu()" de la classe "GameMenu" et retourner sa valeur
+    bool displayMenu(sf::RenderWindow& window);
 
 
 };

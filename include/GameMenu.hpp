@@ -20,10 +20,12 @@ class GameMenu
     void draw1(sf::RenderWindow& window);
     // Dessiner le texte2(bouton2)
     void draw2(sf::RenderWindow& window);
-    // tester si le text1(bouton1) à été cliquez
+    // Tester si le text1(bouton1) a été cliqué
     bool checkClicked1(sf::RenderWindow& window);
-    // tester si le text2(bouton2) à été cliquez
+    // Tester si le text2(bouton2) a été cliqué
     bool checkClicked2(sf::RenderWindow& window);
+    // Afficher le menu
+    bool displayMenu(sf::RenderWindow& window);
 
 
 };

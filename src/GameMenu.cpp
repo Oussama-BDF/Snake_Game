@@ -35,6 +35,8 @@ bool GameMenu::checkClicked1(sf::RenderWindow& window)
     }
     
     if (this->isClicked1==true){
+        this->text1.setFillColor(sf::Color::White);
+        this->isClicked1=false;
         return true;
     }
     return false;
@@ -54,7 +56,41 @@ bool GameMenu::checkClicked2(sf::RenderWindow& window)
     }
     
     if (this->isClicked2==true){
+        this->text2.setFillColor(sf::Color::White);
+        this->isClicked2=false;
         return true;
     }
+    return false;
+}
+
+
+bool GameMenu::displayMenu(sf::RenderWindow& window)
+{
+    while (window.isOpen()) 
+    {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+
+        window.clear(sf::Color::Black);
+
+        this->draw1(window);
+        this->draw2(window);
+
+        if (this->checkClicked1(window)) {
+            // Text1 a été cliqué
+            return true;
+        }
+
+        if (this->checkClicked2(window)) {
+            // Text2 a été cliqué
+            break;
+        }
+
+        window.display();
+    }    
     return false;
 }

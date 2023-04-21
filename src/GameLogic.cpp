@@ -81,7 +81,7 @@ void GameLogic::play(sf::RenderWindow& window)
         this->logic(window.getSize());
 
         // Sortie de la boucle si l'utilisateur perd
-        if (this->getGameOver()==true)  window.close();
+        if (this->getGameOver()==true)  break;
 
         // Ralentir le mouvement de la boucle (8 images/itérations par second)
         sf::sleep(timePerFrame);
@@ -89,4 +89,9 @@ void GameLogic::play(sf::RenderWindow& window)
     }
 }
 
+
+bool GameLogic::displayMenu(sf::RenderWindow& window)
+{
+    return this->menu.displayMenu(window);
+}
 
