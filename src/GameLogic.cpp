@@ -86,26 +86,6 @@ void GameLogic::play(sf::RenderWindow& window)
         // Appliquer la logique du jeu
         this->logic(window.getSize());
 
-
-        if (this->snake.getTailLength()==18)
-        {
-            
-            for(int j=0; j<382 ; j++)
-            {
-                sf::Event event;
-                while (window.pollEvent(event))
-                {
-                    if (event.type == sf::Event::Closed)
-                        window.close();
-                }
-                window.clear();
-                this->draw(window);
-                window.display();
-                sf::sleep(timePerFrame);
-            }
-            break;
-        }
-
         // Sortir de la boucle si l'utilisateur perd, et afficher "Game Over!!" en 4 seconds
         if (this->getGameOver()==true)
         {
