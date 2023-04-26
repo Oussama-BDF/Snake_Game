@@ -8,10 +8,10 @@
 
 class GameLogic{
     private:
+    GameMenu menu;
     Snake snake;
     Food food;
     Board board;
-    GameMenu menu;
     bool gameOver;
     int score;
 
@@ -28,11 +28,10 @@ class GameLogic{
     // Dessiner tous les objets
     void draw(sf::RenderWindow& window);
 
-    // La boucle principale du jeu
-    void play(sf::RenderWindow& window);
-
-    // Appeler la fonction "displayMenu()" de la classe "GameMenu" et retourner sa valeur
+    // Appeler la fonction "displayMenu()" de la classe "GameMenu" et retourner sa valeur (true:start   false:exit)
     bool displayMenu(sf::RenderWindow& window);
 
+    // La boucle principale du jeu
+    void play(sf::RenderWindow& window);
 
 };

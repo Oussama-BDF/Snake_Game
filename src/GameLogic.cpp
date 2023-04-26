@@ -2,7 +2,7 @@
 
 
 
-GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window), menu(window)
+GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window)
 {
     this->gameOver=false;
     this->score=0;
@@ -52,6 +52,12 @@ void GameLogic::draw(sf::RenderWindow& window)
 }
 
 
+bool GameLogic::displayMenu(sf::RenderWindow& window)
+{
+    return this->menu.displayMenu(window);
+}
+
+
 void GameLogic::play(sf::RenderWindow& window)
 {
     //on aura besoin cette variable pour ralentir le mouvement de la boucle principale (8 images par second)
@@ -80,8 +86,51 @@ void GameLogic::play(sf::RenderWindow& window)
         // Appliquer la logique du jeu
         this->logic(window.getSize());
 
-        // Sortie de la boucle si l'utilisateur perd
-        if (this->getGameOver()==true)  break;
+
+        if (this->snake.getTailLength()==18)
+        {
+            
+            for(int j=0; j<382 ; j++)
+            {
+                sf::Event event;
+                while (window.pollEvent(event))
+                {
+                    if (event.type == sf::Event::Closed)
+                        window.close();
+                }
+                window.clear();
+                this->draw(window);
+                window.display();
+                sf::sleep(timePerFrame);
+            }
+            break;
+        }
+
+        // Sortir de la boucle si l'utilisateur perd, et afficher "Game Over!!" en 4 seconds
+        if (this->getGameOver()==true)
+        {
+            sf::Font font;
+            font.loadFromFile("police.ttf");
+            sf::Text text("Game Over!!",font,60);
+            // Positionner le texte
+            text.setPosition(window.getSize().x/2 - text.getGlobalBounds().width/2 , window.getSize().y/2 - text.getGlobalBounds().height/2);
+            
+            for(int j=0; j<32 ; j++)
+            {
+                sf::Event event;
+                while (window.pollEvent(event))
+                {
+                    if (event.type == sf::Event::Closed)
+                        window.close();
+                }
+                window.clear();
+                this->draw(window);
+                window.draw(text);
+                window.display();
+                sf::sleep(timePerFrame);
+            }
+            break;
+        }
 
         // Ralentir le mouvement de la boucle (8 images/itérations par second)
         sf::sleep(timePerFrame);
@@ -89,9 +138,4 @@ void GameLogic::play(sf::RenderWindow& window)
     }
 }
 
-
-bool GameLogic::displayMenu(sf::RenderWindow& window)
-{
-    return this->menu.displayMenu(window);
-}
 

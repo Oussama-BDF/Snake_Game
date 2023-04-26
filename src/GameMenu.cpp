@@ -1,71 +1,51 @@
 #include "GameMenu.hpp"
 
 
-GameMenu::GameMenu(const sf::Vector2u& window) : text1("Start", this->font, 60), text2("Exit!", this->font, 60)
+bool GameMenu::checkClicked(sf::RenderWindow& window, sf::FloatRect& textRect, sf::Text& text, bool& isClicked)
 {
-    this->font.loadFromFile("police.ttf");
-    this->text2.setPosition(window.x/2 - this->text2.getGlobalBounds().width/2 , window.y/2 - this->text2.getGlobalBounds().height/2 + 60);
-    this->text1.setPosition(window.x/2 - this->text1.getGlobalBounds().width/2 , window.y/2 - this->text1.getGlobalBounds().height/2 - 60);
-    this->textRect1 = this->text1.getGlobalBounds();
-    this->textRect2 = this->text2.getGlobalBounds();
-    this->isClicked1=false;
-}
-
-
-void GameMenu::draw1(sf::RenderWindow& window) 
-{
-    window.draw(this->text1);
-}
-
-
-void GameMenu::draw2(sf::RenderWindow& window) 
-{
-    window.draw(this->text2);
-}
-
-
-bool GameMenu::checkClicked1(sf::RenderWindow& window)
-{
-    if (this->textRect1.contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
+    if (textRect.contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            this->text1.setFillColor(sf::Color(89,89,88));
-            this->isClicked1=true;
+            text.setFillColor(sf::Color(140,140,140));
+            isClicked=true;
             return false;
         }
     }
     
-    if (this->isClicked1==true){
-        this->text1.setFillColor(sf::Color::White);
-        this->isClicked1=false;
+    if (isClicked==true){
+        text.setFillColor(sf::Color::White);
+        isClicked=false;
         return true;
     }
     return false;
     
 
-}
-
-
-bool GameMenu::checkClicked2(sf::RenderWindow& window)
-{
-    if (this->textRect2.contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            this->text2.setFillColor(sf::Color(89,89,88));
-            this->isClicked2=true;
-            return false;
-        }
-    }
-    
-    if (this->isClicked2==true){
-        this->text2.setFillColor(sf::Color::White);
-        this->isClicked2=false;
-        return true;
-    }
-    return false;
 }
 
 
 bool GameMenu::displayMenu(sf::RenderWindow& window)
 {
+    // La police du text
+    sf::Font font;
+    font.loadFromFile("police.ttf");
+
+    // le titre du jeu
+    sf::Text text("Snake Game", font, 70);
+    text.setPosition(window.getSize().x/2 - text.getGlobalBounds().width/2 , 30 );
+
+    // Le text1 start (Bouton1)
+    sf::Text start("Start", font, 50);
+    start.setPosition(window.getSize().x/2 - start.getGlobalBounds().width/2 , window.getSize().y/2 - start.getGlobalBounds().height/2 - 50);
+    sf::FloatRect textRect1=start.getGlobalBounds();
+
+    // Le text2 exit (Bouton2)
+    sf::Text exit("Exit!", font, 50);
+    exit.setPosition(window.getSize().x/2 - exit.getGlobalBounds().width/2 , window.getSize().y/2 - exit.getGlobalBounds().height/2 + 50);
+    sf::FloatRect textRect2=exit.getGlobalBounds();
+
+    bool isClicked1=false, isClicked2=false;
+
+
+
     while (window.isOpen()) 
     {
         sf::Event event;
@@ -75,17 +55,18 @@ bool GameMenu::displayMenu(sf::RenderWindow& window)
             }
         }
 
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color(48,48,48));
 
-        this->draw1(window);
-        this->draw2(window);
+        window.draw(start);
+        window.draw(exit);
+        window.draw(text);
 
-        if (this->checkClicked1(window)) {
+        if (this->checkClicked(window,textRect1, start, isClicked1)) {
             // Text1 a été cliqué
             return true;
         }
 
-        if (this->checkClicked2(window)) {
+        if (this->checkClicked(window,textRect2, exit, isClicked2)) {
             // Text2 a été cliqué
             break;
         }
