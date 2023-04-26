@@ -3,7 +3,7 @@
 
 ---
 
-### Compiler et exécuter le projet!!
+### La compilation et l'exécution du projet!!
 - Vous devez installer la bibliothèque SFML.
 - Utilisez ces commandes dans votre terminal (Assurez-vous que vous êtes dans le répértoire /src)
 - g++ -c .\main.cpp .\Board.cpp .\Food.cpp .\Snake.cpp .\GameLogic.cpp .\GameMenu.cpp -I(the path of the SFML)/include -DSFML_STATIC -I(the path of the workspace folder)/include
