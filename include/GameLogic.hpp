@@ -4,6 +4,7 @@
 #include "Board.hpp"
 #include "GameMenu.hpp"
 
+using namespace std;
 
 
 class GameLogic{
@@ -13,7 +14,7 @@ class GameLogic{
     Food food;
     Board board;
     bool gameOver;
-    int score;
+    sf::Text score;
 
 
     public:

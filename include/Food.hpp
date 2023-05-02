@@ -14,10 +14,10 @@ class Food{
     // "window" -> "taille-fenêtre" : pour spécifier la position de la nourriture par rapport la fenêtre
     Food(const sf::Vector2u& window);
 
-    // Récupérer la position de la nourriture
+    // Retourner la position de la nourriture
     sf::Vector2f getFoodPos() const;
 
-    // Récuperer l'objet "food"
+    // Retourner l'objet "food"
     sf::Sprite getFood() const;
 
     // Générer une position aléatoire pour la nourriture

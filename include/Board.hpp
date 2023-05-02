@@ -13,12 +13,12 @@ class Board{
     // "window" -> "taille-fenêtre" : pour spécifier la position du plateau par rapport la fenêtre
     Board(const sf::Vector2u& window);
 
-    // Récupérer la position du plateau par rapport la fenêtre
+    // Retourner la position du plateau par rapport la fenêtre
     sf::Vector2f getBoardPos() const;
 
-     // Récupérer la taille du plateau
+     // Retourner la taille du plateau
     sf::Vector2f getBoardSize() const;
 
-    // Récupérer l'objet plateau
+    // Retourner l'objet plateau
     sf::RectangleShape getBoard()const; 
 };

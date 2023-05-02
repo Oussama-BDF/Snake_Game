@@ -5,7 +5,8 @@
 GameLogic::GameLogic(const sf::Vector2u& window) : snake(window), board(window), food(window)
 {
     this->gameOver=false;
-    this->score=0;
+    this->score.setString("Score: 0");
+    this->score.setCharacterSize(40);
 }
 
 
@@ -25,10 +26,12 @@ void GameLogic::logic(const sf::Vector2u& window)
 
         this->snake.addSegment();
             
-        this->score++;
+        // Incrémenter le score 
+        int s = stoi(string(this->score.getString().substring(7))) +1;
+        this->score.setString(this->score.getString().substring(0,7) + to_string(s));
     }
 
-    // Modifier la position du cercle à chaque itération,
+    // Modifier la position de la tête à chaque itération,
 	this->snake.changePos();
 
     // Tester la collision du serpent avec le plateau
@@ -45,6 +48,7 @@ void GameLogic::draw(sf::RenderWindow& window)
     window.draw(this->board.getBoard());
     window.draw(this->food.getFood());
     window.draw(this->snake.getHead());
+     window.draw(this->score);
     for (int l=0; l<this->snake.getTailLength()+2; l++) // +2 pour afficher les segments 1 et 2
     {
         window.draw(this->snake.getSegment(l));
@@ -60,6 +64,13 @@ bool GameLogic::displayMenu(sf::RenderWindow& window)
 
 void GameLogic::play(sf::RenderWindow& window)
 {
+    //On a besoin cette police pour tous les textes
+    sf::Font font;
+    font.loadFromFile("police.ttf");
+
+    this->score.setFont(font);
+    this->score.setPosition(window.getSize().x/2 - this->score.getGlobalBounds().width/2,20);
+
     //on aura besoin cette variable pour ralentir le mouvement de la boucle principale (8 images par second)
     sf::Time timePerFrame = sf::seconds(1.f / 8.f);
 
@@ -86,13 +97,10 @@ void GameLogic::play(sf::RenderWindow& window)
         // Appliquer la logique du jeu
         this->logic(window.getSize());
 
-        // Sortir de la boucle si l'utilisateur perd, et afficher "Game Over!!" en 4 seconds
+        // Afficher "Game Over!!" en 4 seconds, et sortir de la boucle si l'utilisateur perd
         if (this->getGameOver()==true)
         {
-            sf::Font font;
-            font.loadFromFile("police.ttf");
             sf::Text text("Game Over!!",font,60);
-            // Positionner le texte
             text.setPosition(window.getSize().x/2 - text.getGlobalBounds().width/2 , window.getSize().y/2 - text.getGlobalBounds().height/2);
             
             for(int j=0; j<32 ; j++)

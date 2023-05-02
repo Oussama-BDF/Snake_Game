@@ -30,13 +30,13 @@ class Snake{
     int getTailLength() const;
     void setDir(direction);
 
-    // Récupérer l'objet head (de type sprite)
+    // Retourner l'objet head (de type sprite)
     sf::Sprite getHead() const;
 
-    // Récupérer le segment de l'index i (de type CircleShape)
+    // Retourner le segment de l'index i (de type CircleShape)
     sf::CircleShape getSegment(int i) const;
 
-    //Récupérer la position de la tête (de type Vector2f)
+    //Retourner la position de la tête (de type Vector2f)
     sf::Vector2f getHeadPos() const;
 
     // Chaque segment du serpent prend la position du segment suivant
