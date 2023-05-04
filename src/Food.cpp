@@ -9,7 +9,7 @@ Food::Food(const sf::Vector2u& window)
     srand(time(NULL));
 
     // Télécharger l'images de la nourriture, et la mettre dans le centre de la fenêtre
-    this->foodTexture.loadFromFile("Images/food.png");
+    this->foodTexture.loadFromFile("../Images/food.png");
     this->food.setTexture(this->foodTexture);
     food.setPosition((window.x/2 - this->food.getGlobalBounds().width/2) -16, (window.y/2 - this->food.getGlobalBounds().height/2)+32);
 }

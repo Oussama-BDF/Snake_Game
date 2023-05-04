@@ -66,7 +66,7 @@ void GameLogic::play(sf::RenderWindow& window)
 {
     //On a besoin cette police pour tous les textes
     sf::Font font;
-    font.loadFromFile("police.ttf");
+    font.loadFromFile("../Police/police.ttf");
 
     this->score.setFont(font);
     this->score.setPosition(window.getSize().x/2 - this->score.getGlobalBounds().width/2,20);

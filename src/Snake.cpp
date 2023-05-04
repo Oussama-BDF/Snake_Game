@@ -7,10 +7,10 @@ Snake::Snake(){}
 Snake::Snake(const sf::Vector2u& window)
 {
     // Télécharger les images du serpent, et le mettre dans le centre de la fenêtre
-    this->headRight.loadFromFile("Images/headRight.png");
-    this->headLeft.loadFromFile("Images/headLeft.png");
-    this->headUp.loadFromFile("Images/headUp.png");
-    this->headDown.loadFromFile("Images/headDown.png");
+    this->headRight.loadFromFile("../Images/headRight.png");
+    this->headLeft.loadFromFile("../Images/headLeft.png");
+    this->headUp.loadFromFile("../Images/headUp.png");
+    this->headDown.loadFromFile("../Images/headDown.png");
     this->head.setTexture(headRight);
     this->head.setPosition(window.x/2 - this->head.getGlobalBounds().width/2, window.y/2 - this->head.getGlobalBounds().height/2);
     //Initialiser la direction à droit, et la taille des segment à 0

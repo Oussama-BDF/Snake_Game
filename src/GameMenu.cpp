@@ -26,7 +26,7 @@ bool GameMenu::displayMenu(sf::RenderWindow& window)
 {
     // La police du text
     sf::Font font;
-    font.loadFromFile("police.ttf");
+    font.loadFromFile("../Police/police.ttf");
 
     // le titre du jeu
     sf::Text text("Snake Game", font, 70);
