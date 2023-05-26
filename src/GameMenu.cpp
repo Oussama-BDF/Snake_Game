@@ -44,7 +44,12 @@ bool GameMenu::displayMenu(sf::RenderWindow& window)
 
     bool isClicked1=false, isClicked2=false;
 
-
+    // Les bordures
+    sf::RectangleShape border(sf::Vector2f(window.getSize().x -40, window.getSize().y -40));
+    border.setPosition(window.getSize().x/2 - border.getSize().x/2, window.getSize().y/2 - border.getSize().y/2); 
+    border.setOutlineThickness(3);
+    border.setOutlineColor(sf::Color::White);
+    border.setFillColor(sf::Color::Transparent);
 
     while (window.isOpen()) 
     {
@@ -60,6 +65,7 @@ bool GameMenu::displayMenu(sf::RenderWindow& window)
         window.draw(start);
         window.draw(exit);
         window.draw(text);
+        window.draw(border);
 
         if (this->checkClicked(window,textRect1, start, isClicked1)) {
             // Text1 a été cliqué

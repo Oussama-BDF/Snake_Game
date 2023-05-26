@@ -16,7 +16,7 @@
 ![image](Images/sc1.jpg)
 - le jeu
 
-![image](sImages/sc2.jpg)
+![image](Images/sc2.jpg)
 - Fin du jeu
 
 ![image](Images/sc3.jpg)
